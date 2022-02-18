@@ -1,2 +1,2 @@
 # MicroService de email
-Microservice de envio de email com Spring Email e o servidor SMTP do Gmail.
+Microservice de envio de email com Spring Email, o servidor SMTP do Gmail, e RabbitMQ.
