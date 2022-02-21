@@ -22,10 +22,14 @@ public class EmailController {
 	
 	@PostMapping("/send-email")
     public ResponseEntity<EmailModel> sendingEmail(@RequestBody @Valid EmailDto emailDto) {
-        EmailModel emailModel = new EmailModel();
-        BeanUtils.copyProperties(emailDto, emailModel);
-        emailService.sendEmail(emailModel);
-        return new ResponseEntity<>(emailModel, HttpStatus.CREATED);
+		try {
+			EmailModel emailModel = new EmailModel();
+			BeanUtils.copyProperties(emailDto, emailModel);
+			emailService.sendEmail(emailModel);
+			return ResponseEntity.status(HttpStatus.CREATED).body(emailModel);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
     }
 
 }
