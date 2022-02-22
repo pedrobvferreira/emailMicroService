@@ -2,15 +2,19 @@ package com.ms.user.dtos;
 
 import java.io.Serializable;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.ms.user.models.UserModel;
 
 @JsonPropertyOrder({"id","name","email"})
-public class UserDto implements Serializable{
+public class UserDto extends RepresentationModel<UserDto> implements Serializable{
 	
 	private static final long serialVersionUID = 5988032895424885148L;
 	
@@ -57,5 +61,9 @@ public class UserDto implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public static UserDto convert(UserModel user) {
+		return new ModelMapper().map(user, UserDto.class);
 	}
 }

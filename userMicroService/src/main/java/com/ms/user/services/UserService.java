@@ -1,11 +1,11 @@
 package com.ms.user.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.ms.user.dtos.UserDto;
 import com.ms.user.exceptions.ResourceNotFoundException;
 import com.ms.user.models.UserModel;
 import com.ms.user.repositories.UserRepository;
@@ -16,36 +16,41 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public UserModel createUser(UserModel user) {
-		return userRepository.save(user);
+	public UserDto saveUser(UserDto userDto) {
+		UserDto userDtoReturn = UserDto.convert(userRepository.save(UserModel.convert(userDto)));
+		return userDtoReturn;
 	}
-
-	public UserModel updateUser(UserModel user) {
-		final var userModel = userRepository.findById(user.getId());
+	
+	public UserDto findById(Long id) {
+		final var userModel = userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
+		
+		return UserDto.convert(userModel);
+	}
+	
+	public Page<UserDto> findAll(Pageable pageable) {
+		var page = userRepository.findAll(pageable);
+		return page.map(this::convertToUserDto);
+	}
+	
+	private UserDto convertToUserDto(UserModel userModel) {
+		return UserDto.convert(userModel);
+	}
+	
+	public UserDto updateUser(UserDto userDto) {
+		final var userModel = userRepository.findById(userDto.getId());
 		
 		if(!userModel.isPresent()) {
 			new ResourceNotFoundException("No records found for this ID");
 		}
 		
-		return userRepository.save(user);
+		return UserDto.convert(userRepository.save(UserModel.convert(userDto)));
 	}
 	
-	public void  deleteUser(UserModel user) {
-		final var userModel = userRepository.findById(user.getId());
+	public void deleteUser(Long id) {
+		final var userModel = userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
 
-		if(!userModel.isPresent()) {
-			new ResourceNotFoundException("No records found for this ID");
-		}
-		
-		userRepository.delete(user);
-	}
-	
-	public Optional<UserModel> findById(Long id) {
-		return userRepository.findById(id);
-	}
-	
-	public List<UserModel> findAll() {
-		var page = userRepository.findAll();
-		return page;
+		userRepository.delete(userModel);
 	}
 }

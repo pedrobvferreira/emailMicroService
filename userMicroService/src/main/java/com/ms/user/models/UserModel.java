@@ -7,6 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.modelmapper.ModelMapper;
+
+import com.ms.user.dtos.UserDto;
 
 @Entity
 @Table(name = "user_model")
@@ -62,9 +67,14 @@ public class UserModel implements Serializable {
 		this.password = password;
 	}
 	
-	@Override
+	@Transient
 	public String toString() {
 		return "User{" + "id=" + this.id + ", name='" + this.name + '\'' + ", email='" + this.email + '\'' + '}';
+	}
+
+	@Transient
+	public static UserModel convert(UserDto userDto) {
+		return new ModelMapper().map(userDto, UserModel.class);
 	}
 
 }
