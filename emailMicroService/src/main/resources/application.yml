@@ -1,0 +1,28 @@
+server:
+  port: 8080
+    
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ms-email
+    username: postgres
+    password: banco123
+    
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pedrobvferreira@gmail.com
+    password: lgwoljbgrhlqcbsn
+    properties:
+      mail:
+        auth: true
+        starttls:
+          enable:true
+          
+  rabbitmq:
+    addresses: amqps://bjwigwxc:hZatilqNom_Wjg37ymTOlHdD3m3o8r30@beaver.rmq.cloudamqp.com/bjwigwxc 
+    queue: ms.email
+      
