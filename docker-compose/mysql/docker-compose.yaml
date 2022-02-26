@@ -1,0 +1,33 @@
+version: '3'
+ 
+services: # adds 2 services: mysql and phpmyadmin to connect with
+  #Database
+  mysql_db:
+    container_name: mysql_db # add a name for the container
+    image: mysql:latest # use latest version of mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: app_db # create this database on startup
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    volumes:
+      - mysql:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: phpmyadmin_container
+    depends_on:
+      - mysql_db
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: mysql_db # define the address/hostname of the mysql server eg mysql container name.
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: pass #(Required) set the password for the root superuser account.
+    ports:
+      - 8081:80
+    volumes: 
+      - "./:/var/www/html/phpmyadmin"
+
+volumes: # add persistent data even if container is removed.
+   mysql:
