@@ -61,9 +61,9 @@ public class UserController {
 	
 	@GetMapping(value = "/{id}", produces = {"application/json","application/xml"})
 	public UserDto getUserById(@PathVariable("id") Long id) {
-		var userDto = userService.findById(id);
-		userDto.add(linkTo(methodOn(UserController.class).getUserById(id)).withSelfRel());
-		return userDto;
+		var user = userService.findById(id);
+		user.add(linkTo(methodOn(UserController.class).getUserById(id)).withSelfRel());
+		return user;
 	}
 	
 	@PostMapping(produces = {"application/json", "application/xml"}, 
@@ -71,7 +71,7 @@ public class UserController {
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 		try {
 			var user = userService.saveUser(userDto);
-			userDto.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
+			user.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(user);
 		} catch (Exception e) {
@@ -83,7 +83,7 @@ public class UserController {
 			consumes = {"application/json", "application/xml"})
 	public ResponseEntity<?> updateUser(@Valid @RequestBody UserDto userDto) {
 		var user = userService.updateUser(userDto);
-		userDto.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
+		user.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
