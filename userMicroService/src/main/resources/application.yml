@@ -6,7 +6,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/ms-user
+    url: jdbc:postgresql://localhost:5432/ms_user
     username: postgres
     password: banco123
 

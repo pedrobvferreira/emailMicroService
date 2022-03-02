@@ -23,7 +23,6 @@ public class UserModel implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
     private String name;
-    private String user;
     private String email;
     private String password;
     
@@ -41,14 +40,6 @@ public class UserModel implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
 	}
 
 	public String getEmail() {
