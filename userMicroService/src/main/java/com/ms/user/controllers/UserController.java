@@ -30,7 +30,7 @@ import com.ms.user.dtos.UserDto;
 import com.ms.user.services.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 	
 	private UserService userService;
@@ -66,7 +66,7 @@ public class UserController {
 		return userDto;
 	}
 	
-	@PostMapping(value = "/create", produces = {"application/json", "application/xml"}, 
+	@PostMapping(produces = {"application/json", "application/xml"}, 
 			consumes = {"application/json", "application/xml"})
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 		try {

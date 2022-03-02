@@ -7,7 +7,6 @@ import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,7 +17,6 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
 	
 	private static final long serialVersionUID = 5988032895424885148L;
 	
-	@NotNull
 	@JsonProperty("id")
 	private Long id;
 	@NotBlank
@@ -29,6 +27,7 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
 	@JsonProperty("email")
     private String email;
 	@NotBlank
+	@JsonProperty("password")
     private String password;
 
 	public Long getId() {
