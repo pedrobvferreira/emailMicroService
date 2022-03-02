@@ -7,7 +7,7 @@ spring:
       ddl-auto: update
       
   datasource:
-    url: jdbc:postgresql://localhost:5432/ms_email
+    url: jdbc:mysql://localhost:5432/ms_email
     username: postgres
     password: banco123
     

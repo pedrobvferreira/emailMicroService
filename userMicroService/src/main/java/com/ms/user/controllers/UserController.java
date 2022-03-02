@@ -30,7 +30,7 @@ import com.ms.user.dtos.UserDto;
 import com.ms.user.services.UserService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/users")
 public class UserController {
 	
 	private UserService userService;
@@ -42,7 +42,7 @@ public class UserController {
 		this.assembler = assembler;
 	}
 	
-	@GetMapping("/users")
+	@GetMapping(produces = {"application/json","application/xml"})
 	public ResponseEntity<?> getAllUsers(@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "limit", defaultValue = "12") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
@@ -59,14 +59,15 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(pagedModel);
 	}
 	
-	@GetMapping(value = "/users/{id}")
+	@GetMapping(value = "/{id}", produces = {"application/json","application/xml"})
 	public UserDto getUserById(@PathVariable("id") Long id) {
 		var userDto = userService.findById(id);
 		userDto.add(linkTo(methodOn(UserController.class).getUserById(id)).withSelfRel());
 		return userDto;
 	}
 	
-	@PostMapping(value = "/users")
+	@PostMapping(value = "/create", produces = {"application/json", "application/xml"}, 
+			consumes = {"application/json", "application/xml"})
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 		try {
 			var user = userService.saveUser(userDto);
@@ -78,7 +79,8 @@ public class UserController {
 		}
     }
 	
-	@PutMapping(value = "/users/{id}")
+	@PutMapping(value = "/{id}", produces = {"application/json", "application/xml"}, 
+			consumes = {"application/json", "application/xml"})
 	public ResponseEntity<?> updateUser(@Valid @RequestBody UserDto userDto) {
 		var user = userService.updateUser(userDto);
 		userDto.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
@@ -86,7 +88,7 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 	
-	@DeleteMapping(value = "/users/{id}")
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable("id") Long id){	
 		userService.deleteUser(id);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
