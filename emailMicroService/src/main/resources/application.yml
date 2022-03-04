@@ -1,15 +1,24 @@
 server:
-  port: 8080
+  port: 8083
+  servlet:
+    context-path: /mailMicroService
     
 spring:
+  application:
+    name: mailMicroService
   jpa:
+    show-sql: false
     hibernate:
       ddl-auto: update
-      
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+  jmx:
+    enabled: false
   datasource:
     url: jdbc:mysql://localhost:5432/ms_email
-    username: postgres
-    password: banco123
+    username: root
+    password: pass
     
   mail:
     host: smtp.gmail.com
