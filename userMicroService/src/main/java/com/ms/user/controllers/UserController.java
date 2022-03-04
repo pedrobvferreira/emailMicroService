@@ -47,12 +47,12 @@ public class UserController {
 	
 	@GetMapping(produces = {"application/json","application/xml"})
 	public ResponseEntity<?> getAllUsers(@RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "limit", defaultValue = "12") int limit,
+			@RequestParam(value = "limit", defaultValue = "5") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
 		
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 
-		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "nome"));
+		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "name"));
 		
 		Page<UserDto> users = userService.findAll(pageable);
 		users.stream().forEach(p -> p.add(linkTo(methodOn(UserController.class).getUserById(p.getId())).withSelfRel()));
