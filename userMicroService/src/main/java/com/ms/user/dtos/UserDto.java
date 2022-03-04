@@ -29,7 +29,6 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
 	@Email
 	@JsonProperty("email")
     private String email;
-	@NotBlank
 	@JsonProperty("password")
     private String password;
 

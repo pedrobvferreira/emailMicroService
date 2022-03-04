@@ -73,10 +73,14 @@ public class UserController {
 			consumes = {"application/json", "application/xml"})
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 		try {
-			var user = userService.saveUser(userDto);
-			user.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
-			
-			return ResponseEntity.status(HttpStatus.CREATED).body(user);
+			if(userDto.getPassword()!=null && !userDto.getPassword().isEmpty()) {
+				var user = userService.saveUser(userDto);
+				user.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
+				
+				return ResponseEntity.status(HttpStatus.CREATED).body(user);
+			}else {
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+			}
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
@@ -88,7 +92,9 @@ public class UserController {
 		var user = userService.findById(id);
 		user.setName(userDto.getName());
 		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
+		if(userDto.getPassword()!=null && !userDto.getPassword().isEmpty() && userDto.getPassword()!=user.getPassword()) {
+			user.setPassword(userDto.getPassword());
+		}
 		userService.updateUser(user);
 		user.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
 		
