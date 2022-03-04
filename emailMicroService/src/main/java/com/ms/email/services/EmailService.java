@@ -12,14 +12,20 @@ import com.ms.email.enums.StatusEmail;
 import com.ms.email.models.EmailModel;
 import com.ms.email.repositories.EmailRepository;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @Service
 public class EmailService {
 
-	@Autowired
-    EmailRepository emailRepository;
+	private EmailRepository emailRepository;
+    private JavaMailSender emailSender;
 	
 	@Autowired
-    private JavaMailSender emailSender;
+	public EmailService(EmailRepository emailRepository, JavaMailSender emailSender) {
+		this.emailRepository = emailRepository;
+		this.emailSender = emailSender;
+	}
 
 	/** Method to send Email **/
 	public EmailModel sendEmail(EmailModel emailModel) {
@@ -29,7 +35,7 @@ public class EmailService {
 			message.setFrom(emailModel.getEmailFrom());
 			message.setTo(emailModel.getEmailTo());
 			message.setSubject(emailModel.getSubject());
-			message.setText(emailModel.getText());
+			message.setText(emailModel.getBody());
 			emailSender.send(message);
 			
 			emailModel.setStatusEmail(StatusEmail.SENT);

@@ -5,13 +5,18 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.ms.email.enums.StatusEmail;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @Entity
 @Table(name = "email_model")
 public class EmailModel implements Serializable {
@@ -21,14 +26,16 @@ public class EmailModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String reference;
 	private String emailFrom;
 	private String emailTo;
 	private String subject;
 	@Column(columnDefinition = "TEXT")
-	private String text;
+	private String body;
 	private LocalDateTime sendDate;
 	private StatusEmail statusEmail;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	private UserModel userModel;
 
 	public Long getId() {
 		return id;
@@ -37,15 +44,7 @@ public class EmailModel implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getReference() {
-		return reference;
-	}
-
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
-
+	
 	public String getEmailFrom() {
 		return emailFrom;
 	}
@@ -70,12 +69,12 @@ public class EmailModel implements Serializable {
 		this.subject = subject;
 	}
 
-	public String getText() {
-		return text;
+	public String getBody() {
+		return body;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setBody(String body) {
+		this.body = body;
 	}
 
 	public LocalDateTime getSendDate() {
@@ -92,6 +91,14 @@ public class EmailModel implements Serializable {
 
 	public void setStatusEmail(StatusEmail statusEmail) {
 		this.statusEmail = statusEmail;
+	}
+	
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
 	}
 	
 	@Override
