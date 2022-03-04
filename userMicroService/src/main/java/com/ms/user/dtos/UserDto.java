@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.ms.user.models.UserModel;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @JsonPropertyOrder({"id","name","email"})
 public class UserDto extends RepresentationModel<UserDto> implements Serializable{
 	

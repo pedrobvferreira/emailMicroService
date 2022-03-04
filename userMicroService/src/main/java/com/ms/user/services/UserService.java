@@ -10,6 +10,9 @@ import com.ms.user.exceptions.ResourceNotFoundException;
 import com.ms.user.models.UserModel;
 import com.ms.user.repositories.UserRepository;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @Service
 public class UserService {
 	

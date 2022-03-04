@@ -13,6 +13,9 @@ import org.modelmapper.ModelMapper;
 
 import com.ms.user.dtos.UserDto;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @Entity
 @Table(name = "user_model")
 public class UserModel implements Serializable {

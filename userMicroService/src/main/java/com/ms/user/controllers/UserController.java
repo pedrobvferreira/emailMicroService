@@ -29,6 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ms.user.dtos.UserDto;
 import com.ms.user.services.UserService;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -81,8 +84,12 @@ public class UserController {
 	
 	@PutMapping(value = "/{id}", produces = {"application/json", "application/xml"}, 
 			consumes = {"application/json", "application/xml"})
-	public ResponseEntity<?> updateUser(@Valid @RequestBody UserDto userDto) {
-		var user = userService.updateUser(userDto);
+	public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserDto userDto) {
+		var user = userService.findById(id);
+		user.setName(userDto.getName());
+		user.setEmail(userDto.getEmail());
+		user.setPassword(userDto.getPassword());
+		userService.updateUser(user);
 		user.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(user);

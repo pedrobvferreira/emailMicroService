@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.ms.user.models.UserModel;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Long>{
 
