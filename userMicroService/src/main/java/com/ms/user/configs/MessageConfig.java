@@ -1,4 +1,4 @@
-package com.ms.user.config;
+package com.ms.user.configs;
 
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.core.ExchangeBuilder;
