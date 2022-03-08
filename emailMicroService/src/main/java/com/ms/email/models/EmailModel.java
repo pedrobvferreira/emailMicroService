@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.ms.email.enums.StatusEmail;
-
 /**
  * @author Pedro Ferreira
  **/
@@ -30,7 +28,7 @@ public class EmailModel implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String body;
 	private LocalDateTime sendDate;
-	private StatusEmail statusEmail;
+	private String statusEmail;
 
 	public Long getId() {
 		return id;
@@ -80,11 +78,11 @@ public class EmailModel implements Serializable {
 		this.sendDate = sendDate;
 	}
 
-	public StatusEmail getStatusEmail() {
+	public String getStatusEmail() {
 		return statusEmail;
 	}
 
-	public void setStatusEmail(StatusEmail statusEmail) {
+	public void setStatusEmail(String statusEmail) {
 		this.statusEmail = statusEmail;
 	}
 	
