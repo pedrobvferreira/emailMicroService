@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "userMicroService.rabbitmq.exchange",
+    "type": "java.lang.String",
+    "description": "A description for 'userMicroService.rabbitmq.exchange'"
+  },
+  {
+    "name": "userMicroService.rabbitmq.routingkey",
+    "type": "java.lang.String",
+    "description": "A description for 'userMicroService.rabbitmq.routingkey'"
+  }
+]}
