@@ -2,10 +2,13 @@ package com.ms.user.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -28,6 +31,10 @@ public class UserModel implements Serializable {
     private String name;
     private String email;
     private String password;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_email_model", referencedColumnName = "id")
+    private EmailModel emailSender;
     
     public Long getId() {
 		return id;
@@ -61,6 +68,14 @@ public class UserModel implements Serializable {
 		this.password = password;
 	}
 	
+	public EmailModel getEmailSender() {
+		return emailSender;
+	}
+
+	public void setEmailSender(EmailModel emailSender) {
+		this.emailSender = emailSender;
+	}
+	
 	@Transient
 	public String toString() {
 		return "User{" + "id=" + this.id + ", name='" + this.name + '\'' + ", email='" + this.email + '\'' + '}';
@@ -70,5 +85,4 @@ public class UserModel implements Serializable {
 	public static UserModel convert(UserDto userDto) {
 		return new ModelMapper().map(userDto, UserModel.class);
 	}
-
 }

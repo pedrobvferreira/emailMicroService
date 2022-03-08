@@ -1,18 +1,15 @@
-package com.ms.email.dtos;
+package com.ms.user.dtos;
 
 import javax.validation.constraints.*;
 
 public class EmailDto {
 
-	@NotBlank
 	@Email
 	private String emailFrom;
 	@NotBlank
 	@Email
 	private String emailTo;
-	@NotBlank
 	private String subject;
-	@NotBlank
 	private String text;
 
 	public String getEmailFrom() {

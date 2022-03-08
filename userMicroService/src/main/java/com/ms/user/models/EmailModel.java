@@ -1,4 +1,4 @@
-package com.ms.email.models;
+package com.ms.user.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -8,9 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.ms.email.enums.StatusEmail;
+import org.modelmapper.ModelMapper;
+
+import com.ms.user.dtos.EmailDto;
 
 /**
  * @author Pedro Ferreira
@@ -30,7 +34,9 @@ public class EmailModel implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String body;
 	private LocalDateTime sendDate;
-	private StatusEmail statusEmail;
+	
+	@OneToOne(mappedBy = "emailModel")
+    private UserModel user;
 
 	public Long getId() {
 		return id;
@@ -79,18 +85,23 @@ public class EmailModel implements Serializable {
 	public void setSendDate(LocalDateTime sendDate) {
 		this.sendDate = sendDate;
 	}
-
-	public StatusEmail getStatusEmail() {
-		return statusEmail;
-	}
-
-	public void setStatusEmail(StatusEmail statusEmail) {
-		this.statusEmail = statusEmail;
-	}
 	
 	@Override
 	public String toString() {
 		return "Email{" + "id=" + this.id + ", emailFrom='" + this.emailFrom + '\'' + ", emailTo='" + this.emailTo + '\'' + '}';
+	}
+
+	public UserModel getUser() {
+		return user;
+	}
+
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
+	
+	@Transient
+	public static EmailModel convert(EmailDto emailDto) {
+		return new ModelMapper().map(emailDto, EmailModel.class);
 	}
 
 }

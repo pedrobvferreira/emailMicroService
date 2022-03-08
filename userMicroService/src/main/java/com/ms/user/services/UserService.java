@@ -5,9 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.ms.user.dtos.EmailDto;
 import com.ms.user.dtos.UserDto;
 import com.ms.user.exceptions.ResourceNotFoundException;
+import com.ms.user.models.EmailModel;
 import com.ms.user.models.UserModel;
+import com.ms.user.repositories.EmailRepository;
 import com.ms.user.repositories.UserRepository;
 
 /**
@@ -16,11 +19,26 @@ import com.ms.user.repositories.UserRepository;
 @Service
 public class UserService {
 	
-	@Autowired
 	UserRepository userRepository;
+	EmailRepository emailRepository;
+	
+	@Autowired
+	public UserService(UserRepository userRepository, EmailRepository emailRepository) {
+		this.userRepository = userRepository;
+	}
 	
 	public UserDto saveUser(UserDto userDto) {
-		UserDto userDtoReturn = UserDto.convert(userRepository.save(UserModel.convert(userDto)));
+		final var userModel = userRepository.save(UserModel.convert(userDto));
+		
+		EmailDto emailDto = new EmailDto();
+		emailDto.setEmailFrom("companhia@gmail.com");
+		emailDto.setEmailTo(userDto.getEmail());
+		emailDto.setSubject("Criação do Email");
+		emailDto.setText("MicroServico de Envio de Email");
+		userDto.setEmailSenderDto(emailDto);
+		emailRepository.save(EmailModel.convert(emailDto));
+		
+		UserDto userDtoReturn = UserDto.convert(userModel);
 		return userDtoReturn;
 	}
 	

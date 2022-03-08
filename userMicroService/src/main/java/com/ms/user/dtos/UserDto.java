@@ -31,6 +31,9 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
     private String email;
 	@JsonProperty("password")
     private String password;
+	
+	@JsonProperty("emailSend")
+	private EmailDto emailSenderDto;
 
 	public Long getId() {
 		return id;
@@ -62,6 +65,14 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public EmailDto getEmailSenderDto() {
+		return emailSenderDto;
+	}
+
+	public void setEmailSenderDto(EmailDto emailSenderDto) {
+		this.emailSenderDto = emailSenderDto;
 	}
 	
 	public static UserDto convert(UserModel user) {
