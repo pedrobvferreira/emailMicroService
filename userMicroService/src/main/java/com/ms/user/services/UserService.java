@@ -34,7 +34,7 @@ public class UserService {
 		emailDto.setEmailFrom("companhia@gmail.com");
 		emailDto.setEmailTo(userDto.getEmail());
 		emailDto.setSubject("Criação do Email");
-		emailDto.setText("MicroServico de Envio de Email");
+		emailDto.setBody("MicroServico de Envio de Email");
 		userDto.setEmailSenderDto(emailDto);
 		emailRepository.save(EmailModel.convert(emailDto));
 		

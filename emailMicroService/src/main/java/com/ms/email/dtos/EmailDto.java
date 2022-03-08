@@ -13,7 +13,7 @@ public class EmailDto {
 	@NotBlank
 	private String subject;
 	@NotBlank
-	private String text;
+	private String body;
 
 	public String getEmailFrom() {
 		return emailFrom;
@@ -39,11 +39,11 @@ public class EmailDto {
 		this.subject = subject;
 	}
 
-	public String getText() {
-		return text;
+	public String getBody() {
+		return body;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setBody(String body) {
+		this.body = body;
 	}
 }

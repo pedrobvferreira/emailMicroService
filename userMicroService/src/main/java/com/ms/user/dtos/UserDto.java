@@ -32,7 +32,6 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
 	@JsonProperty("password")
     private String password;
 	
-	@JsonProperty("emailSend")
 	private EmailDto emailSenderDto;
 
 	public Long getId() {
