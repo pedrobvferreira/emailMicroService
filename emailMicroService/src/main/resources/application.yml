@@ -31,8 +31,7 @@ spring:
         starttls:
           enable:true
           
-userMicroService:
   rabbitmq:
-    exchange: userMicroService.exchange
-    queue: userMicroService.user.queue
+    addresses: amqps://bjwigwxc:hZatilqNom_Wjg37ymTOlHdD3m3o8r30@beaver.rmq.cloudamqp.com/bjwigwxc 
+    queue: ms.email
       
