@@ -32,7 +32,7 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
 	@JsonProperty("password")
     private String password;
 	
-	private EmailDto emailSenderDto;
+	private EmailDto emailDto;
 
 	public Long getId() {
 		return id;
@@ -66,12 +66,12 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
 		this.password = password;
 	}
 
-	public EmailDto getEmailSenderDto() {
-		return emailSenderDto;
+	public EmailDto getEmailDto() {
+		return emailDto;
 	}
 
-	public void setEmailSenderDto(EmailDto emailSenderDto) {
-		this.emailSenderDto = emailSenderDto;
+	public void setEmailDto(EmailDto emailDto) {
+		this.emailDto = emailDto;
 	}
 	
 	public static UserDto convert(UserModel user) {

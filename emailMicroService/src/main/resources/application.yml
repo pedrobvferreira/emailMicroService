@@ -32,6 +32,7 @@ spring:
           enable:true
           
   rabbitmq:
-    addresses: amqps://bjwigwxc:hZatilqNom_Wjg37ymTOlHdD3m3o8r30@beaver.rmq.cloudamqp.com/bjwigwxc 
+    addresses: amqps://bjwigwxc:hZatilqNom_Wjg37ymTOlHdD3m3o8r30@beaver.rmq.cloudamqp.com/bjwigwxc
+    exchange: amq.headers
     queue: ms.email
       

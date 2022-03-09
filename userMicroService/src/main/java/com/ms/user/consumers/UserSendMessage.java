@@ -1,4 +1,4 @@
-package com.ms.user.message;
+package com.ms.user.consumers;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import com.ms.user.dtos.UserDto;
 @Component
 public class UserSendMessage {
 	
-	@Value("${userMicroService.rabbitmq.exchange}")
+	@Value("${spring.rabbitmq.exchange}")
 	String exchange;
 	
-	@Value("${crud.rabbitmq.routingkey}")
+	@Value("${spring.rabbitmq.routingkey}")
 	String routingkey;
 	
 	public final RabbitTemplate rabbitTemplate;

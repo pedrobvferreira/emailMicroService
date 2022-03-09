@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
  * @author Pedro Ferreira
  **/
 @Configuration
-public class MessageConfig {
+public class RabbitMQConfig {
 	
-	@Value("${crud.rabbitmq.exchange}")
+	@Value("${spring.rabbitmq.exchange}")
 	String exchange;
 	
 	@Bean
