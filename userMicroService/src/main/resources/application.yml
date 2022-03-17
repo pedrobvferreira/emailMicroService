@@ -21,7 +21,13 @@ spring:
     password: pass
     
   rabbitmq:
-    addresses: amqps://bjwigwxc:hZatilqNom_Wjg37ymTOlHdD3m3o8r30@beaver.rmq.cloudamqp.com/bjwigwxc
-    exchange: amq.direct
-    routingkey: mail.routingkey
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
+user:
+  rabbitmq:
+    exchange: user.exchange
+    routingkey: user.email.routingkey
  

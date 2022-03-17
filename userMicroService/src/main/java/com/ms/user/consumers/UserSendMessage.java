@@ -13,10 +13,10 @@ import com.ms.user.dtos.UserDto;
 @Component
 public class UserSendMessage {
 	
-	@Value("${spring.rabbitmq.exchange}")
+	@Value("${user.rabbitmq.exchange}")
 	String exchange;
 	
-	@Value("${spring.rabbitmq.routingkey}")
+	@Value("${user.rabbitmq.routingkey}")
 	String routingkey;
 	
 	public final RabbitTemplate rabbitTemplate;
