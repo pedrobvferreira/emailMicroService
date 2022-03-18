@@ -2,6 +2,7 @@ package com.ms.user.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,9 +25,17 @@ public class UserModel implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
+	@Column(name = "id")
 	private Long id;
+	
+	@Column(name = "name")
     private String name;
+	
+	@Column(name = "email")
     private String email;
+	
+	@Column(name = "password")
     private String password;
     
     public Long getId() {
