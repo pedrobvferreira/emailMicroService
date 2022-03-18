@@ -13,7 +13,7 @@ CREATE SCHEMA `ms_email` ;
 CREATE TABLE `ms_email`.`user_model` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
-  `ms_email` VARCHAR(100) NULL,
+  `email` VARCHAR(100) NULL,
   PRIMARY KEY (`id`));
 
 CREATE TABLE `ms_email`.`email_model` (
