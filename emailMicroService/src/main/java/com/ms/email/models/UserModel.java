@@ -2,14 +2,11 @@ package com.ms.email.models;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -38,10 +35,6 @@ public class UserModel implements Serializable {
     @Column(name = "email")
     private String email;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_email_model", referencedColumnName = "id")
-    private EmailModel emailSender;
-    
     public Long getId() {
 		return id;
 	}
@@ -64,14 +57,6 @@ public class UserModel implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	
-	public EmailModel getEmailSender() {
-		return emailSender;
-	}
-
-	public void setEmailSender(EmailModel emailSender) {
-		this.emailSender = emailSender;
 	}
 	
 	@Transient
