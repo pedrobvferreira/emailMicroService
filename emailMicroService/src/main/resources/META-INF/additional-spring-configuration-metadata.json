@@ -1,12 +1,12 @@
 {"properties": [
   {
-    "name": "spring.rabbitmq.queue",
+    "name": "user.rabbitmq.exchange",
     "type": "java.lang.String",
-    "description": "A description for 'spring.rabbitmq.queue'"
+    "description": "A description for 'user.rabbitmq.exchange'"
   },
   {
-    "name": "spring.rabbitmq.exchange",
+    "name": "user.rabbitmq.queue",
     "type": "java.lang.String",
-    "description": "A description for 'spring.rabbitmq.exchange'"
+    "description": "A description for 'user.rabbitmq.queue'"
   }
 ]}
