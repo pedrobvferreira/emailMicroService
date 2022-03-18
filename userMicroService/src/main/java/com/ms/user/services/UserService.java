@@ -27,14 +27,6 @@ public class UserService {
 	}
 	
 	public UserDto saveUser(UserDto userDto) {
-//		EmailDto emailDto = new EmailDto();
-//		emailDto.setEmailFrom("companhia@gmail.com");
-//		emailDto.setEmailTo(userDto.getEmail());
-//		emailDto.setSubject("Criação do Email");
-//		emailDto.setBody("MicroServico de Envio de Email");
-//		emailRepository.save(EmailModel.convert(emailDto));
-//		userDto.setEmailDto(emailDto);
-		
 		UserDto userDtoReturn = UserDto.convert(userRepository.save(UserModel.convert(userDto)));
 		userSendMessage.sendMessage(userDto);
 		

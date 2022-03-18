@@ -1,11 +1,19 @@
 package com.ms.email.repositories;
 
-import java.util.UUID;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.ms.email.models.EmailModel;
 
-public interface EmailRepository extends JpaRepository<EmailModel, UUID>{
+/**
+ * @author Pedro Ferreira
+ **/
+public interface EmailRepository extends JpaRepository<EmailModel, Long>{
+	
+	@Query("SELECT em FROM email_model em where em.email like :email") 
+	List<EmailModel> findByEmail(@Param("email") String email);
 
 }

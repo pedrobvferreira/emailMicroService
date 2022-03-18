@@ -1,6 +1,7 @@
 package com.ms.email.services;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -25,6 +26,11 @@ public class EmailService {
 	public EmailService(EmailRepository emailRepository, JavaMailSender emailSender) {
 		this.emailRepository = emailRepository;
 		this.emailSender = emailSender;
+	}
+	
+	/** Method to find Email **/
+	public List<EmailModel> findByEmail(String email) {
+		return emailRepository.findByEmail(email);
 	}
 
 	/** Method to send Email **/

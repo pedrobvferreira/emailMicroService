@@ -10,6 +10,9 @@ import com.ms.email.dtos.EmailDto;
 import com.ms.email.models.EmailModel;
 import com.ms.email.services.EmailService;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @Component
 public class EmailConsumer {
 	

@@ -3,6 +3,9 @@ package com.ms.email;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author Pedro Ferreira
+ **/
 @SpringBootApplication
 public class MSEmailApp {
 	
