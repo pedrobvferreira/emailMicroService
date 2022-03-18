@@ -28,7 +28,7 @@ public class UserService {
 	
 	public UserDto saveUser(UserDto userDto) {
 		UserDto userDtoReturn = UserDto.convert(userRepository.save(UserModel.convert(userDto)));
-		userSendMessage.sendMessage(userDto);
+		userSendMessage.sendMessage(userDtoReturn);
 		
 		return userDtoReturn;
 	}
