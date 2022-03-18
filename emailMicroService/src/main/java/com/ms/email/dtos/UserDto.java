@@ -2,14 +2,11 @@ package com.ms.email.dtos;
 
 import java.io.Serializable;
 
-import org.modelmapper.ModelMapper;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.ms.email.models.UserModel;
 
 /**
  * @author Pedro Ferreira
@@ -30,8 +27,6 @@ public class UserDto implements Serializable{
     private String email;
 	@JsonProperty("password")
     private String password;
-	
-	private EmailDto emailSenderDto;
 
 	public Long getId() {
 		return id;
@@ -63,17 +58,5 @@ public class UserDto implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public EmailDto getEmailSenderDto() {
-		return emailSenderDto;
-	}
-
-	public void setEmailSenderDto(EmailDto emailSenderDto) {
-		this.emailSenderDto = emailSenderDto;
-	}
-	
-	public static UserDto convert(UserModel user) {
-		return new ModelMapper().map(user, UserDto.class);
 	}
 }

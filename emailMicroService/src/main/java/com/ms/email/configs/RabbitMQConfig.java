@@ -11,7 +11,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
 @Configuration
 public class RabbitMQConfig {
 	
-	@Value("${spring.rabbitmq.queue}")
+	@Value("$user.rabbitmq.exchange}")
 	private String queue;
 
 	@Bean
