@@ -27,7 +27,7 @@ public class UserReceiveMessage {
 		this.emailService = emailService;
 	}
 	
-	@RabbitListener(queues = "${user.email.queue}")
+	@RabbitListener(queues = "${user.rabbitmq.queue}")
 	public void receiveMessage(@Payload UserDto userDto) {
 		UserModel userModel = new UserModel();
 		BeanUtils.copyProperties(userDto, userModel);

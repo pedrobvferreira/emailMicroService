@@ -13,7 +13,7 @@ import com.ms.email.models.EmailModel;
  **/
 public interface EmailRepository extends JpaRepository<EmailModel, Long>{
 	
-	@Query("SELECT em FROM email_model em where em.email like :email%") 
+	@Query("SELECT em FROM EmailModel em where email like :email%") 
 	List<EmailModel> findByEmail(@Param("email") String email);
 
 }

@@ -19,7 +19,7 @@ public class EmailConsumer {
 	@Autowired
 	EmailService emailService;
 
-	@RabbitListener(queues = "${spring.rabbitmq.queue}")
+	//@RabbitListener(queues = "${spring.rabbitmq.queue}")
 	public void listen(@Payload EmailDto emailDto) {
 		EmailModel emailModel = new EmailModel();
 		BeanUtils.copyProperties(emailDto, emailModel);
