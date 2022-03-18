@@ -3,6 +3,7 @@ package com.ms.email.models;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,10 +30,13 @@ public class UserModel implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
+	@Column(name = "id")
 	private Long id;
+	 @Column(name = "name")
     private String name;
+    @Column(name = "email")
     private String email;
-    private String password;
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_email_model", referencedColumnName = "id")
@@ -60,14 +64,6 @@ public class UserModel implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	
 	public EmailModel getEmailSender() {
