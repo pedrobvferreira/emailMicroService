@@ -1,12 +1,12 @@
 package com.ms.email.configs;
 
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.Exchange;
+import org.springframework.amqp.core.ExchangeBuilder;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
 
 /**
  * @author Pedro Ferreira
@@ -14,16 +14,16 @@ import org.springframework.amqp.support.converter.MessageConverter;
 @Configuration
 public class RabbitMQConfig {
 	
-	@Value("$user.rabbitmq.exchange}")
-	private String queue;
-
+	@Value("${user.rabbitmq.exchange}")
+	String exchange;
+	
 	@Bean
-	public Queue queue() {
-		return new Queue(queue, true);
+	public Exchange declareExchange() {
+		return ExchangeBuilder.directExchange(exchange).durable(true).build();
 	}
 	
 	@Bean
-    public MessageConverter messageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
+	public MessageConverter jsonMessageConverter() {
+		return new Jackson2JsonMessageConverter();
+	}
 }
