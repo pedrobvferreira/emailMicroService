@@ -21,11 +21,12 @@ spring:
     password: pass
     
   mail:
+    default-encoding: UTF-8
     host: smtp.gmail.com
     port: 587
+    protocol: smtp
     username: pedrobvferreira@gmail.com
     password: vhpfcoqrswbuvsdf
-    # Outras propriedades 
     properties:
       mail:
         auth: true
