@@ -39,6 +39,5 @@ public class UserReceiveMessage {
 		emailModel.setSubject("Criação do Email");
 		emailModel.setBody("MicroServico de Envio de Email");
 		emailService.sendEmail(emailModel);
-		
 	}
 }

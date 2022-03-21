@@ -37,12 +37,12 @@ public class EmailService {
 	public EmailModel sendEmail(EmailModel emailModel) {
 		emailModel.setSendDate(LocalDateTime.now());
 		try {
-			SimpleMailMessage message = new SimpleMailMessage();
-			message.setFrom(emailModel.getEmailFrom());
-			message.setTo(emailModel.getEmailTo());
-			message.setSubject(emailModel.getSubject());
-			message.setText(emailModel.getBody());
-			emailSender.send(message);
+			SimpleMailMessage msg = new SimpleMailMessage();
+			msg.setFrom(emailModel.getEmailFrom());
+			msg.setTo(emailModel.getEmailTo());
+			msg.setSubject(emailModel.getSubject());
+			msg.setText(emailModel.getBody());
+			emailSender.send(msg);
 			
 			emailModel.setStatusEmail(StatusEmail.SENT.getValue());
 		} catch (MailException e) {
