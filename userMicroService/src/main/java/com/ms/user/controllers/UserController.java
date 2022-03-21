@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ms.user.dtos.UserDto;
 import com.ms.user.services.UserService;
+import com.ms.user.utils.StringUtils;
 
 /**
  * @author Pedro Ferreira
@@ -73,7 +74,7 @@ public class UserController {
 			consumes = {"application/json", "application/xml"})
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 		try {
-			if(userDto.getPassword()!=null && !userDto.getPassword().isEmpty()) {
+			if(StringUtils.isNotNullOrEmpty(userDto.getPassword())) {
 				var user = userService.saveUser(userDto);
 				user.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel());
 				
@@ -92,7 +93,7 @@ public class UserController {
 		var user = userService.findById(id);
 		user.setName(userDto.getName());
 		user.setEmail(userDto.getEmail());
-		if(userDto.getPassword()!=null && !userDto.getPassword().isEmpty() && userDto.getPassword()!=user.getPassword()) {
+		if(StringUtils.isNotNullOrEmpty(userDto.getPassword()) && userDto.getPassword()!=user.getPassword()) {
 			user.setPassword(userDto.getPassword());
 		}
 		userService.updateUser(user);
