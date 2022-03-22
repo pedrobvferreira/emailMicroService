@@ -1,2 +1,2 @@
 # MicroService de email
-Microservice de envio de email com Spring Email, o servidor SMTP do Gmail, e RabbitMQ.
+Microserviço de envio de email com Spring Email, servidor SMTP do Gmail, e RabbitMQ, Eureka Server/Eureka Client
