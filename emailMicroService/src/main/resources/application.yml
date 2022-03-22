@@ -47,3 +47,9 @@ user:
     exchange: user.exchange
     queue: user.email.queue
       
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/registry/eureka
