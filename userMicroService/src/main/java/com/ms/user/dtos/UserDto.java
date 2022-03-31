@@ -32,6 +32,16 @@ public class UserDto extends RepresentationModel<UserDto> implements Serializabl
 	@JsonProperty("password")
     private String password;
 	
+	public UserDto() {
+		
+	}
+	
+	public UserDto(Long id, String name, String email) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+	}
+
 	public Long getId() {
 		return id;
 	}

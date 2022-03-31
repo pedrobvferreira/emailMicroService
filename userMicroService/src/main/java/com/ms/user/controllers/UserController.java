@@ -34,7 +34,7 @@ import com.ms.user.utils.StringUtils;
  * @author Pedro Ferreira
  **/
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/users")
 public class UserController {
 	
 	private UserService userService;
@@ -55,7 +55,7 @@ public class UserController {
 
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "name"));
 		
-		Page<UserDto> users = userService.findAll(pageable);
+		Page<UserDto> users = userService.getAllUsers(pageable);
 		users.stream().forEach(p -> p.add(linkTo(methodOn(UserController.class).getUserById(p.getId())).withSelfRel()));
 		
 		PagedModel<EntityModel<UserDto>> pagedModel = assembler.toModel(users);
@@ -64,10 +64,11 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/{id}", produces = {"application/json","application/xml"})
-	public UserDto getUserById(@PathVariable("id") Long id) {
-		var user = userService.findById(id);
+	public ResponseEntity<?> getUserById(@PathVariable("id") Long id) {
+		var user = userService.getUserById(id);
 		user.add(linkTo(methodOn(UserController.class).getUserById(id)).withSelfRel());
-		return user;
+		
+		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 	
 	@PostMapping(produces = {"application/json", "application/xml"}, 
@@ -90,7 +91,7 @@ public class UserController {
 	@PutMapping(value = "/{id}", produces = {"application/json", "application/xml"}, 
 			consumes = {"application/json", "application/xml"})
 	public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserDto userDto) {
-		var user = userService.findById(id);
+		var user = userService.getUserById(id);
 		user.setName(userDto.getName());
 		user.setEmail(userDto.getEmail());
 		if(StringUtils.isNotNullOrEmpty(userDto.getPassword()) && userDto.getPassword()!=user.getPassword()) {
@@ -103,7 +104,7 @@ public class UserController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable("id") Long id){	
+	public ResponseEntity<?> deleteUserById(@PathVariable("id") Long id){	
 		userService.deleteUser(id);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}

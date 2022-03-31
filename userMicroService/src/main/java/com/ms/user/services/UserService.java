@@ -33,14 +33,14 @@ public class UserService {
 		return userDtoReturn;
 	}
 	
-	public UserDto findById(Long id) {
+	public UserDto getUserById(Long id) {
 		final var userModel = userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
 		
 		return UserDto.convert(userModel);
 	}
 	
-	public Page<UserDto> findAll(Pageable pageable) {
+	public Page<UserDto> getAllUsers(Pageable pageable) {
 		var page = userRepository.findAll(pageable);
 		return page.map(this::convertToUserDto);
 	}
