@@ -34,7 +34,7 @@ import com.ms.user.utils.StringUtils;
  * @author Pedro Ferreira
  **/
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 	
 	private UserService userService;

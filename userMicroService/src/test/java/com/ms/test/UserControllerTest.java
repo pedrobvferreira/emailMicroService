@@ -3,7 +3,6 @@ package com.ms.test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,7 +27,7 @@ import com.ms.user.services.UserService;
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
 	
-	public static String endpoint = "/api/users";
+	public static String endpoint = "/users";
 	
 	@Autowired
 	private MockMvc mockMvc;
