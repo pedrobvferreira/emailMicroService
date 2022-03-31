@@ -46,7 +46,7 @@ public class UserController {
 		this.assembler = assembler;
 	}
 	
-	@GetMapping(produces = {"application/json","application/xml"})
+	@GetMapping(value = "", produces = {"application/json","application/xml"})
 	public ResponseEntity<?> getAllUsers(@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "limit", defaultValue = "5") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
@@ -71,7 +71,7 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 	
-	@PostMapping(produces = {"application/json", "application/xml"}, 
+	@PostMapping(value = "", produces = {"application/json", "application/xml"}, 
 			consumes = {"application/json", "application/xml"})
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 		try {
